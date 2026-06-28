@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🚖 MamaTaxi</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MamaTaxi</title>
 
-  <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <div class="container">
 
-<h1>🚖 MamaTaxi</h1>
-<p>Bestelle dein Mama-Taxi</p>
+    <h1>🚖 MamaTaxi</h1>
+    <p class="subtitle">Dein privater Fahrdienst</p>
 
-<label>📍 Abholort</label>
-<input type="text" placeholder="Wo bist du?">
+    <label>📍 Abholort</label>
+    <input id="pickup" type="text" placeholder="Wo bist du?">
 
-<label>🏠 Ziel</label>
-<input type="text" placeholder="Wo möchtest du hin?">
+    <label>🏁 Ziel</label>
+    <input id="destination" type="text" placeholder="Wo möchtest du hin?">
 
-<button>🚖 Mama rufen</button>
+    <button id="requestRide">
+        🚖 Mama rufen
+    </button>
 
-<div class="status">
-<h2>Status</h2>
-<p>Noch keine Anfrage.</p>
-</div>
+    <div class="status-box">
+        <h2>Status</h2>
+        <p id="status">Noch keine Anfrage gesendet.</p>
+    </div>
 
 </div>
 
