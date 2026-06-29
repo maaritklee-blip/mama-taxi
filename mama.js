@@ -3,9 +3,10 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
   getFirestore,
   collection,
-  onSnapshot
+  onSnapshot,
+  doc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
 import {
   getAuth,
   onAuthStateChanged
@@ -38,15 +39,36 @@ onAuthStateChanged(auth, (user) => {
     snapshot.forEach((doc) => {
       const ride = doc.data();
 
-      ridesDiv.innerHTML += `
-        <div class="ride">
-          <h3>🚖 Neue Anfrage</h3>
-          <p><strong>📍 Abholung:</strong> ${ride.pickup}</p>
-          <p><strong>🏁 Ziel:</strong> ${ride.destination}</p>
-          <hr>
-        </div>
-      `;
+     ridesDiv.innerHTML += `
+    <div class="ride">
+        <h3>🚖 Neue Anfrage</h3>
+
+        <p><strong>📍 Abholung:</strong> ${ride.pickup}</p>
+
+        <p><strong>🏁 Ziel:</strong> ${ride.destination}</p>
+
+        <p><strong>💰 Aufgabe:</strong> ${ride.price || "Noch keine Aufgabe festgelegt"}</p>
+
+<button onclick="setPrice('${doc.id}')">
+    💰 Aufgabe festlegen
+</button>
+
+        <hr>
+    </div>
+`;
     });
 
   });
 });
+window.setPrice = async function(id) {
+
+  const price = prompt("Welche Aufgabe soll erledigt werden?");
+
+  if (!price) return;
+
+  await updateDoc(doc(db, "rides", id), {
+    price: price
+  });
+
+  alert("✅ Aufgabe gespeichert!");
+};
