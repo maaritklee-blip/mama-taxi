@@ -5,7 +5,8 @@ import {
   collection,
   onSnapshot,
   doc,
-  updateDoc
+  updateDoc,
+  deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {
   getAuth,
@@ -52,7 +53,9 @@ onAuthStateChanged(auth, (user) => {
 <button onclick="setPrice('${doc.id}')">
     💰 Aufgabe festlegen
 </button>
-
+<button onclick="finishRide('${doc.id}')">
+    ✅ Erledigt
+</button>
         <hr>
     </div>
 `;
@@ -71,4 +74,12 @@ window.setPrice = async function(id) {
   });
 
   alert("✅ Aufgabe gespeichert!");
+};
+window.finishRide = async function(id) {
+
+  if (!confirm("Fahrt wirklich als erledigt markieren?")) return;
+
+  await deleteDoc(doc(db, "rides", id));
+
+  alert("🎉 Fahrt erledigt!");
 };
