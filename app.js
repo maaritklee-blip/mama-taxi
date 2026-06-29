@@ -39,7 +39,8 @@ const status = document.getElementById("status");
 button.addEventListener("click", async () => {
   const pickup = document.getElementById("pickup").value;
   const destination = document.getElementById("destination").value;
-
+const time = document.getElementById("time").value;
+  
   if (!pickup || !destination) {
     alert("Bitte Abholort und Ziel eingeben.");
     return;
@@ -49,6 +50,7 @@ button.addEventListener("click", async () => {
     await addDoc(collection(db, "rides"), {
   pickup,
   destination,
+  time,
   status: "Anfrage gesendet",
   price: "",
   createdAt: new Date()
