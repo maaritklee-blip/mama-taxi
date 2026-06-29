@@ -42,9 +42,10 @@ button.addEventListener("click", async () => {
   const destination = document.getElementById("destination").value;
 const time = document.getElementById("time").value;
   
-  if (!pickup || !destination) {
-    alert("Bitte Abholort und Ziel eingeben.");
-    return;
+  if (!pickup || !destination || !time) {
+  alert("Bitte Abholort, Ziel und Uhrzeit eingeben.");
+  return;
+}
   }
 
   try {
