@@ -2,7 +2,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import {
   getFirestore,
   collection,
-  addDoc
+  addDoc,
+  query,
+  orderBy,
+  limit,
+  onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 import {
@@ -54,4 +58,34 @@ button.addEventListener("click", async () => {
     console.error(error);
     status.textContent = "❌ Fehler beim Speichern.";
   }
+});
+const latestRide = document.createElement("div");
+latestRide.id = "latestRide";
+document.querySelector(".container").appendChild(latestRide);
+
+const q = query(
+  collection(db, "rides"),
+  orderBy("createdAt", "desc"),
+  limit(1)
+);
+
+onSnapshot(q, (snapshot) => {
+
+  if (snapshot.empty) {
+    latestRide.innerHTML = "";
+    return;
+  }
+
+  const ride = snapshot.docs[0].data();
+
+  latestRide.innerHTML = `
+    <hr>
+
+    <h3>🚖 Letzte Anfrage</h3>
+
+    <p><strong>📍 Abholung:</strong> ${ride.pickup}</p>
+    <p><strong>🏁 Ziel:</strong> ${ride.destination}</p>
+    <p><strong>💰 Aufgabe:</strong> ${ride.price || "Noch keine Aufgabe"}</p>
+    <p><strong>📢 Status:</strong> ${ride.status}</p>
+  `;
 });
