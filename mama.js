@@ -72,8 +72,9 @@ window.setPrice = async function(id) {
   if (!price) return;
 
   await updateDoc(doc(db, "rides", id), {
-    price: price
-  });
+  price: price,
+  status: "💰 Aufgabe festgelegt"
+});
 
   alert("✅ Aufgabe gespeichert!");
 };
