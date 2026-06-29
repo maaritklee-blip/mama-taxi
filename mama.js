@@ -48,6 +48,8 @@ onAuthStateChanged(auth, (user) => {
 
         <p><strong>🏁 Ziel:</strong> ${ride.destination}</p>
 
+<p><strong>⏰ Uhrzeit:</strong> ${ride.time}</p>
+ 
         <p><strong>💰 Aufgabe:</strong> ${ride.price || "Noch keine Aufgabe festgelegt"}</p>
 
 <button onclick="setPrice('${doc.id}')">
