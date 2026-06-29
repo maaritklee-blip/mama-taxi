@@ -20,26 +20,26 @@ const db = getFirestore(app);
 
 const ridesDiv = document.getElementById("rides");
 
-onSnapshot(collection(db, "rides"), (snapshot) => {
-
+onSnapshot(
+  collection(db, "rides"),
+  (snapshot) => {
     ridesDiv.innerHTML = "";
 
     snapshot.forEach((doc) => {
+      const ride = doc.data();
 
-        const ride = doc.data();
-
-        ridesDiv.innerHTML += `
-            <div class="ride">
-                <h3>🚖 Neue Anfrage</h3>
-
-                <p><strong>📍 Abholung:</strong> ${ride.pickup}</p>
-
-                <p><strong>🏁 Ziel:</strong> ${ride.destination}</p>
-
-                <hr>
-            </div>
-        `;
-
+      ridesDiv.innerHTML += `
+        <div class="ride">
+          <h3>🚖 Neue Anfrage</h3>
+          <p><strong>📍 Abholung:</strong> ${ride.pickup}</p>
+          <p><strong>🏁 Ziel:</strong> ${ride.destination}</p>
+          <hr>
+        </div>
+      `;
     });
-
-});
+  },
+  (error) => {
+    ridesDiv.innerHTML = "❌ Fehler: " + error.message;
+    console.error(error);
+  }
+);
