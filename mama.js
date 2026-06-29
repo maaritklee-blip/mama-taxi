@@ -55,6 +55,15 @@ onAuthStateChanged(auth, (user) => {
 <button onclick="setPrice('${doc.id}')">
     💰 Aufgabe festlegen
 </button>
+
+<button onclick="startRide('${doc.id}')">
+    🚗 Unterwegs
+</button>
+
+<button onclick="arriveRide('${doc.id}')">
+    📍 Angekommen
+</button>
+
 <button onclick="finishRide('${doc.id}')">
     ✅ Erledigt
 </button>
@@ -77,6 +86,20 @@ window.setPrice = async function(id) {
 });
 
   alert("✅ Aufgabe gespeichert!");
+};
+window.startRide = async function(id) {
+
+  await updateDoc(doc(db, "rides", id), {
+    status: "🚗 Mama ist unterwegs"
+  });
+
+};
+window.arriveRide = async function(id) {
+
+  await updateDoc(doc(db, "rides", id), {
+    status: "📍 Mama ist angekommen"
+  });
+
 };
 window.finishRide = async function(id) {
 
