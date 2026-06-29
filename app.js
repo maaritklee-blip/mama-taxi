@@ -35,6 +35,7 @@ onAuthStateChanged(auth, (user) => {
 
 const button = document.getElementById("requestRide");
 const status = document.getElementById("status");
+const task = document.getElementById("task");
 
 button.addEventListener("click", async () => {
   const pickup = document.getElementById("pickup").value;
@@ -60,4 +61,23 @@ const time = document.getElementById("time").value;
     console.error(error);
     status.textContent = "❌ Fehler beim Speichern.";
   }
+});
+const q = query(
+  collection(db, "rides"),
+  orderBy("createdAt", "desc"),
+  limit(1)
+);
+
+onSnapshot(q, (snapshot) => {
+
+  if (snapshot.empty) {
+    status.textContent = "Noch keine aktive Anfrage.";
+    task.textContent = "Noch keine Aufgabe";
+    return;
+  }
+
+  const ride = snapshot.docs[0].data();
+
+  status.textContent = ride.status || "Noch keine aktive Anfrage.";
+  task.textContent = ride.price || "Noch keine Aufgabe";
 });
