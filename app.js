@@ -46,7 +46,6 @@ const time = document.getElementById("time").value;
   alert("Bitte Abholort, Ziel und Uhrzeit eingeben.");
   return;
 }
-  }
 
   try {
     await addDoc(collection(db, "rides"), {
