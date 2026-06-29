@@ -43,12 +43,12 @@ button.addEventListener("click", async () => {
 
   try {
     await addDoc(collection(db, "rides"), {
-      pickup,
-      destination,
-      status: "Anfrage gesendet",
-      createdAt: new Date()
-    });
-
+  pickup,
+  destination,
+  status: "Anfrage gesendet",
+  price: "",
+  createdAt: new Date()
+});
     status.textContent = "✅ Anfrage wurde in Firebase gespeichert!";
   } catch (error) {
     console.error(error);
