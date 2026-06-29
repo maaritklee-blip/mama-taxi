@@ -5,8 +5,7 @@ import {
   collection,
   onSnapshot,
   doc,
-  updateDoc,
-  deleteDoc
+  updateDoc 
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import {
   getAuth,
@@ -105,7 +104,10 @@ window.finishRide = async function(id) {
 
   if (!confirm("Fahrt wirklich als erledigt markieren?")) return;
 
-  await deleteDoc(doc(db, "rides", id));
+ await updateDoc(doc(db, "rides", id), {
+  status: "Keine aktive Anfrage",
+  price: ""
+});
 
-  alert("🎉 Fahrt erledigt!");
+alert("🎉 Fahrt erledigt!");
 };
