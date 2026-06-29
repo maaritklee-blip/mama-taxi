@@ -5,6 +5,11 @@ import {
   addDoc
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+import {
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDuXjoePXrmbBWtJJkVl8T2UVshli1O3MM",
   authDomain: "mamataxi-da5aa.firebaseapp.com",
@@ -15,7 +20,14 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
+
+onAuthStateChanged(auth, (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+  }
+});
 
 const button = document.getElementById("requestRide");
 const status = document.getElementById("status");
