@@ -53,7 +53,7 @@ button.addEventListener("click", async () => {
   price: "",
   createdAt: new Date()
 });
-    status.textContent = "✅ Anfrage wurde in Firebase gespeichert!";
+    status.textContent = "✅ Anfrage gesendet!";
   } catch (error) {
     console.error(error);
     status.textContent = "❌ Fehler beim Speichern.";
